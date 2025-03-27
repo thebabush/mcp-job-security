@@ -4,6 +4,12 @@ LLVM 19 pass that inserts references string constants at random locations in the
 
 Tested on macOS.
 
+## Why
+
+IDA Pro MCP is using AI to take jobs away from honest working reverse engineers.
+
+Seems to me like we can leverage LLMs alignment training / filters to make it stop replying, thus saving thousands, possibly more reversing jobs.
+
 ## Usage
 
 ```sh
