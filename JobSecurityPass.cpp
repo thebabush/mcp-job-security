@@ -45,7 +45,7 @@ namespace
 {
 
     cl::opt<std::string> StringsFilePath("strings", cl::desc("Path to string file (one string per line)"), cl::init("strings.txt"));
-    cl::opt<std::string> LabelsFilePath("labels", cl::desc("Path to label file (one label per line)"), cl::init("strings.txt"));
+    cl::opt<std::string> LabelsFilePath("labels", cl::desc("Path to label file (one label per line)"), cl::init("labels.txt"));
     cl::opt<unsigned int> SeedValue("seed", cl::desc("Seed for pseudorandom number generator"), cl::init(42));
 
     // Simple pseudorandom number generator
