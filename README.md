@@ -1,8 +1,8 @@
 # Job Security Pass
 
-LLVM 19 pass that inserts references string constants at random locations in the program.
+LLVM pass that inserts references to string constants at random locations in the program.
 
-Tested on macOS.
+Tested on macOS w/ LLVM 19.1.7.
 
 ## Why
 
