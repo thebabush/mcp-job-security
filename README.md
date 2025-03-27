@@ -1,4 +1,4 @@
-# Job Security Pass
+# MCP Job Security Pass
 
 LLVM pass that inserts references to string constants at random locations in the program.
 
