@@ -10,6 +10,8 @@ IDA Pro MCP is using AI to take jobs away from honest working reverse engineers.
 
 Seems to me like we can leverage LLMs alignment training / filters to make it stop replying, thus saving thousands, possibly more reversing jobs.
 
+TL;DR: stop vibeversing / vibe reversing.
+
 ## Usage
 
 ```sh
