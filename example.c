@@ -3,7 +3,7 @@
 
 #define FLAG "CTF{r3vers3_3ngin33ring_cha11enge}"
 
-int check_flag(const char *input) {
+static int check_flag(const char *input) {
     return strcmp(input, FLAG) == 0;
 }
 

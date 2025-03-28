@@ -169,19 +169,75 @@ namespace
                 }
             }
 
-            int  labelCounter= 0;
+            int labelCounter = 0;
             for (Function &F : M)
             {
                 for (BasicBlock &BB : F)
                 {
-                    std::string label = labels[labelCounter % labels.size()];
                     labelCounter++;
-                    Twine LabelName = Twine(label) + Twine("_") + Twine(labelCounter);
+                    Twine LabelName = Twine(getRandomLabel()) + Twine("_") + Twine(labelCounter);
                     BB.setName(LabelName);
                 }
             }
 
+            int instructionCounter = 0;
+            for (Function &F : M)
+            {
+                int counter = 0;
+                for (BasicBlock &BB : F)
+                {
+                    IRBuilder<> Builder(&BB);
+                    for (Instruction &I : BB)
+                    {
+                        if (!I.getType()->isVoidTy())
+                        {
+                            instructionCounter++;
+
+                            Twine LabelName = Twine(getRandomLabel()) + Twine("_") + Twine(instructionCounter);
+                            I.setName(LabelName);
+                        }
+                    }
+                }
+            }
+
+            for (Function &F : M)
+            {
+                // Check if the function has internal linkage
+                if (isSafeToRename(F))
+                {
+                    std::string newName = getRandomLabel();
+                    F.setName(newName);
+                }
+            }
+
             return PreservedAnalyses::none();
+        }
+
+    private:
+        bool isSafeToRename(Function &F)
+        {
+            // Check if the function has external linkage or is declared but not defined
+            if (F.isDeclaration() || F.hasExternalLinkage())
+                return false;
+
+            // Check if the function is used in inline assembly
+            for (auto &BB : F)
+            {
+                for (auto &I : BB)
+                {
+                    if (auto *CI = dyn_cast<CallInst>(&I))
+                    {
+                        if (CI->isInlineAsm())
+                            return false;
+                    }
+                }
+            }
+
+            // Check if the function is an intrinsic
+            if (F.isIntrinsic())
+                return false;
+
+            return true;
         }
     };
 
